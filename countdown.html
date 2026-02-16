@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting Guide - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a4d68 0%, #088395 50%, #05bfdb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        /* Animated background hexagons */
+        .hex-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hexagon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.03);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hexagon:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .hexagon:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .hexagon:nth-child(3) {
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .hexagon:nth-child(4) {
+            bottom: 25%;
+            right: 10%;
+            animation-delay: 6s;
+        }
+
+        .hexagon:nth-child(5) {
+            top: 50%;
+            left: 5%;
+            animation-delay: 8s;
+        }
+
+        .hexagon:nth-child(6) {
+            top: 60%;
+            right: 5%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(180deg);
+                opacity: 0.1;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #088395, #05bfdb);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 42px;
+            color: #0a4d68;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #088395;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .instructor-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .instructor-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #05bfdb;
+            box-shadow: 0 10px 30px rgba(8, 131, 149, 0.3);
+        }
+
+        .instructor-info {
+            text-align: left;
+            max-width: 400px;
+        }
+
+        .instructor-name {
+            font-size: 28px;
+            color: #0a4d68;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .instructor-title {
+            font-size: 16px;
+            color: #088395;
+            margin-bottom: 15px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #05bfdb;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .countdown-section {
+            margin: 40px 0;
+        }
+
+        .countdown-title {
+            font-size: 20px;
+            color: #0a4d68;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, #0a4d68, #088395);
+            padding: 25px;
+            border-radius: 15px;
+            min-width: 120px;
+            box-shadow: 0 5px 20px rgba(8, 131, 149, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .countdown-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 14px;
+            color: #05bfdb;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .website-url {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #05bfdb, #088395);
+            border-radius: 15px;
+            display: none;
+            /* Initially hide the button */
+        }
+
+        .website-url a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .website-url a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .instructor-section {
+                flex-direction: column;
+            }
+
+            .instructor-info {
+                text-align: center;
+            }
+
+            .stats {
+                justify-content: center;
+            }
+
+            .countdown-item {
+                min-width: 100px;
+                padding: 20px;
+            }
+
+            .countdown-value {
+                font-size: 36px;
+            }
+
+            .website-url a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hex-background">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="badge">Accounting Excellence</div>
+            <h1>G.C.E Advance Level Examination</h1>
+            <p class="subtitle">Accounting Learning Management System</p>
+            <p class="tagline">A සිහිනයේ හර බැර යාත්‍රාව...</p>
+        </div>
+
+        <div class="instructor-section">
+            <img src="nuwa.png" alt="Nuwan Aberathne" class="instructor-image">
+            <div class="instructor-info">
+                <div class="instructor-name">Nuwan Aberathne</div>
+                <div class="instructor-title">Lead Instructor - Accounting</div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value">1000+</div>
+                        <div class="stat-label">Students</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Pass Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">6+</div>
+                        <div class="stat-label">Years Exp.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="countdown-section">
+            <h2 class="countdown-title">Website Launching In</h2>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="website-url">
+            <a href="https://accountingguide.lk" target="_blank">accountingguide.lk</a>
+        </div>
+
+        <div class="footer">
+            <p>🚀 Launching Today at 7:00 PM</p>
+        </div>
+    </div>
+
+    <script>
+        // Set the launch time to today at 7:00 PM
+        const today = new Date();
+        const launchTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 19, 0, 0);
+
+        function updateCountdown() {
+            const now = new Date();
+            const difference = launchTime - now;
+
+            if (difference <= 0) {
+                // Launch time reached
+                document.getElementById('hours').textContent = "00";
+                document.getElementById('minutes').textContent = "00";
+                document.getElementById('seconds').textContent = "00";
+
+                // Show the website link button
+                const websiteUrl = document.querySelector('.website-url');
+                if (websiteUrl) {
+                    websiteUrl.style.display = 'block';
+                }
+
+                // Change the countdown title
+                const title = document.querySelector('.countdown-title');
+                if (title) {
+                    title.textContent = "WE ARE LIVE!";
+                }
+                return;
+            }
+
+            const hours = Math.floor(difference / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+
+</html>
